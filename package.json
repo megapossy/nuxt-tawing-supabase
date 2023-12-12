@@ -1,8 +1,8 @@
 {
-  "name": "my-module",
+  "name": "@nuxt/tawing-supabase",
   "version": "1.0.0",
-  "description": "My new Nuxt module",
-  "repository": "your-org/my-module",
+  "description": "Supabase module by me hehe",
+  "repository": "https://github.com/megapossy/nuxt-tawing-supabase.git",
   "license": "MIT",
   "type": "module",
   "exports": {
