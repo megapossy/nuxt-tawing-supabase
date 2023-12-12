@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "my-module-playground",
+  "name": "@nuxt/tawing-supabase-playground",
   "type": "module",
   "scripts": {
     "dev": "nuxi dev",
