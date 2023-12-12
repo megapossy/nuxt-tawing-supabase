@@ -65,7 +65,6 @@ export default defineEventHandler(async (event) => {
 
 ```
 
-<!-- Badges -->
 <!-- [npm-version-src]: https://img.shields.io/npm/v/my-module/latest.svg?style=flat&colorA=18181B&colorB=28CF8D -->
 <!-- [npm-version-href]: https://npmjs.com/package/my-module -->
 
@@ -75,5 +74,6 @@ export default defineEventHandler(async (event) => {
 <!-- [license-src]: https://img.shields.io/npm/l/my-module.svg?style=flat&colorA=18181B&colorB=28CF8D
 [license-href]: https://npmjs.com/package/my-module -->
 
+<!-- Badges -->
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com
