@@ -1,6 +1,14 @@
 import { initTawingSupabase } from "nuxt-tawing-supabase";
-import { defineNitroPlugin } from "nitropack/dist/runtime/plugin";
-import { useRuntimeConfig } from "nitropack/dist/runtime/config";
+import type { NitroApp } from "nitropack"
+
+import { useRuntimeConfig } from '#imports'
+
+// type stub
+type NitroAppPlugin = (nitro: NitroApp) => void
+
+function defineNitroPlugin(def: NitroAppPlugin): NitroAppPlugin {
+  return def
+}
 
 export default defineNitroPlugin(() => {
   const config = useRuntimeConfig().tawingSupabase
