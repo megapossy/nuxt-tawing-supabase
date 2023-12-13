@@ -58,7 +58,7 @@ export default defineNuxtConfig({
 or
 
 ```env
-SUPABASE_URI=https://some.supabase.com'
+SUPABASE_URI=https://some.supabase.com
 SUPABASE_KEY=asd1234somesupabasekeyasd1234somesupabasekey
 ```
 
