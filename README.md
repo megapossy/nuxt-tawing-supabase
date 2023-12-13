@@ -28,25 +28,25 @@ My Nuxt module for doing supabase things.
 
 ## Quick Setup
 
-1. Add `@nuxt/tawing-supabase` dependency to your project
+1. Add `nuxt-tawing-supabase` dependency to your project
 
 ```bash
 # Using pnpm
-pnpm add @nuxt/tawing-supabase
+pnpm add nuxt-tawing-supabase
 
 # Using yarn
-yarn add @nuxt/tawing-supabase
+yarn add nuxt-tawing-supabase
 
 # Using npm
-npm install @nuxt/tawing-supabase
+npm install nuxt-tawing-supabase
 ```
 
-2. Add `@nuxt/tawing-supabase` to the `modules` section of `nuxt.config.ts`
+2. Add `nuxt-tawing-supabase` to the `modules` section of `nuxt.config.ts`
 
 ```js
 export default defineNuxtConfig({
   modules: [
-    '@nuxt/tawing-supabase'
+    'nuxt-tawing-supabase'
   ].
   tawingSupabase: {
     supabaseUri: 'https://some.supabase.com',
@@ -70,7 +70,7 @@ That's it! You can now use Nuxt Tawing Supabase in your Nuxt app ✨
 ```js
 // server/api/some/endpoint
 
-import { client } from "@nuxt/tawing-supabase";
+import { client } from "nuxt-tawing-supabase";
 
 export default defineEventHandler(async (event) => {
   const { data } = await client.from("some_table").select().returns();

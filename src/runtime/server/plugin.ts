@@ -1,4 +1,4 @@
-import { initTawingSupabase } from "@nuxt/tawing-supabase";
+import { initTawingSupabase } from "nuxt-tawing-supabase";
 
 export default defineNitroPlugin(() => {
   const config = useRuntimeConfig().tawingSupabase
