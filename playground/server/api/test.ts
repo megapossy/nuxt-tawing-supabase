@@ -1,9 +1,6 @@
-import {
-  useNitro
-} from "@nuxt/kit";
+import { client } from "@nuxt/tawing-supabase";
 
 export default defineEventHandler(async (event) => {
-  const nitro = useNitro()
-  
-  return 'asdsadasd' + nitro.options.experimental.xxxx
-})  
+  const { data } = await client.from("email_list").select().returns();
+  return data;
+});

@@ -17,23 +17,14 @@ Find and replace all on all files (CMD+SHIFT+F):
 My Nuxt module for doing supabase things.
 
 - [✨ &nbsp;Release Notes](/CHANGELOG.md)
-<!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/my-module?file=playground%2Fapp.vue) -->
-<!-- - [📖 &nbsp;Documentation](https://example.com) -->
-<!-- [npm-version-src]: https://img.shields.io/npm/v/my-module/latest.svg?style=flat&colorA=18181B&colorB=28CF8D -->
-<!-- [npm-version-href]: https://npmjs.com/package/my-module -->
 
-<!-- [npm-downloads-src]: https://img.shields.io/npm/dm/my-module.svg?style=flat&colorA=18181B&colorB=28CF8D
-[npm-downloads-href]: https://npmjs.com/package/my-module -->
-
-<!-- [license-src]: https://img.shields.io/npm/l/my-module.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://npmjs.com/package/my-module -->
 
 ## Features
 
 <!-- Highlight some of the features your module provide here -->
-- ⛰ &nbsp;Foo
-- 🚠 &nbsp;Bar
-- 🌲 &nbsp;Baz
+- ⛰ &nbsp;Supabase API
+- 🚠 &nbsp;For server use only.
+- 🌲 &nbsp;Ethyl4lyf!
 
 ## Quick Setup
 
@@ -56,20 +47,35 @@ npm install @nuxt/tawing-supabase
 export default defineNuxtConfig({
   modules: [
     '@nuxt/tawing-supabase'
-  ]
+  ].
+  tawingSupabase: {
+    supabaseUri: 'https://some.supabase.com',
+    supabaseKey: 'asd1234somesupabasekeyasd1234somesupabasekey'
+  },  
 })
 ```
+
+or
+
+```env
+SUPABASE_URI: 'https://some.supabase.com',
+SUPABASE_KEY: 'asd1234somesupabasekeyasd1234somesupabasekey'
+```
+
 
 That's it! You can now use Nuxt Tawing Supabase in your Nuxt app ✨
 
 ## Development
 
 ```js
-// server/api/some-post
+// server/api/some/endpoint
+
+import { client } from "@nuxt/tawing-supabase";
 
 export default defineEventHandler(async (event) => {
-  // some here
-})
+  const { data } = await client.from("some_table").select().returns();
+  return data;
+});
 
 ```
 
