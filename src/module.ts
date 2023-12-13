@@ -17,7 +17,7 @@ export interface ModuleOptions {
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: "@nuxt/tawing-supabase",
+    name: "nuxt-tawing-supabase",
     configKey: "tawingSupabase",
     compatibility: {
       // Semver version of supported nuxt versions
@@ -43,7 +43,7 @@ export default defineNuxtModule<ModuleOptions>({
       _config.alias = _config.alias || {};
 
       // Inline module runtime in Nitro bundle
-      _config.alias["@nuxt/tawing-supabase"] = resolve(
+      _config.alias["nuxt-tawing-supabase"] = resolve(
         "./runtime/server/services"
       );
     });
@@ -53,7 +53,7 @@ export default defineNuxtModule<ModuleOptions>({
     addTypeTemplate({
       filename: "types/nuxt-tawing-supabase.d.ts",
       getContents: () =>
-        `declare module '@nuxt/tawing-supabase' {
+        `declare module 'nuxt-tawing-supabase' {
             const client: typeof import('${resolve("./runtime/server/services")}').client
             const initTawingSupabase: typeof import('${resolve("./runtime/server/services")}').initTawingSupabase
         }`
@@ -62,6 +62,6 @@ export default defineNuxtModule<ModuleOptions>({
     // add server plugin
     addServerPlugin(resolve("./runtime/server/plugin"));
 
-    logger.success("`@nuxt/tawing-supabase` is ready!");
+    logger.success("`nuxt-tawing-supabase` is ready!");
   },
 });
