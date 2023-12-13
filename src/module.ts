@@ -6,7 +6,6 @@ import {
   defineNuxtModule,
   logger,
   addServerPlugin,
-  addTemplate,
 } from "@nuxt/kit";
 
 // Module options TypeScript interface definition
@@ -37,6 +36,8 @@ export default defineNuxtModule<ModuleOptions>({
       supabaseKey: options.supabaseKey,
       supabaseUri: options.supabaseUri,
     });
+
+    logger.success("`nuxt-tawing-supabase` is starting!");
 
     // virtual imports
     nuxt.hook("nitro:config", (_config) => {

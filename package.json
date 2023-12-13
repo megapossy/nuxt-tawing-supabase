@@ -1,8 +1,11 @@
 {
   "name": "nuxt-tawing-supabase",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "description": "Supabase module by me hehe",
-  "repository": "https://github.com/megapossy/nuxt-tawing-supabase.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/megapossy/nuxt-tawing-supabase.git"
+  },
   "license": "MIT",
   "type": "module",
   "exports": {
