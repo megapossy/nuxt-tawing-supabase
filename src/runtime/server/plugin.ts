@@ -3,6 +3,11 @@ import type { NitroApp } from "nitropack"
 
 import { useRuntimeConfig } from '#imports'
 
+
+/**
+ * Due to an upstream bug in Nuxt 3 we need to stub the plugin here, 
+ * track: https://github.com/nuxt/nuxt/issues/18556
+ */
 // type stub
 type NitroAppPlugin = (nitro: NitroApp) => void
 
