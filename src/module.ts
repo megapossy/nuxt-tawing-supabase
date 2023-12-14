@@ -48,10 +48,11 @@ export default defineNuxtModule<ModuleOptions>({
         "./runtime/server/services"
       );
 
+      // DISABLED for now
       // polyfill unicorn-magic
-      _config.alias["unicorn-magic"] = resolve(
-        "./runtime/polyfills/unicorn-magic"
-      );
+      // _config.alias["unicorn-magic"] = resolve(
+      //   "./runtime/polyfills/unicorn-magic"
+      // );
     });
 
 
