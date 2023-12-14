@@ -44,7 +44,12 @@
     "@types/node": "^20.10.3",
     "changelogen": "^0.5.5",
     "eslint": "^8.55.0",
-    "nuxt": "^3.8.2",
+    "nuxt": "3.8.0",
+    "nitropack": "2.7.0",
     "vitest": "^0.33.0"
-  }
+  },
+  "overrides": {
+    "nitropack": "2.7.0",
+    "nuxt": "3.8.0"
+  }  
 }

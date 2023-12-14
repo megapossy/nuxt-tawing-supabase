@@ -8,6 +8,10 @@
     "generate": "nuxi generate"
   },
   "devDependencies": {
-    "nuxt": "latest"
-  }
+    "nuxt": "3.8.0"
+  },
+  "overrides": {
+    "nitropack": "2.7.0",
+    "nuxt": "3.8.0"
+  }  
 }
