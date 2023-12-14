@@ -47,6 +47,11 @@ export default defineNuxtModule<ModuleOptions>({
       _config.alias["nuxt-tawing-supabase"] = resolve(
         "./runtime/server/services"
       );
+
+      // polyfill unicorn-magic
+      _config.alias["unicorn-magic"] = resolve(
+        "./runtime/polyfills/unicorn-magic.js"
+      );
     });
 
 
