@@ -50,7 +50,7 @@ export default defineNuxtModule<ModuleOptions>({
 
       // polyfill unicorn-magic
       _config.alias["unicorn-magic"] = resolve(
-        "./runtime/polyfills/unicorn-magic.js"
+        "./runtime/polyfills/unicorn-magic"
       );
     });
 
