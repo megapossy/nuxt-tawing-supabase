@@ -7,6 +7,7 @@ import {
   logger,
   addServerPlugin,
   addImports,
+  addPlugin,
 } from "@nuxt/kit";
 
 // Module options TypeScript interface definition
@@ -34,6 +35,12 @@ export default defineNuxtModule<ModuleOptions>({
 
     const config = nuxt.options.runtimeConfig as any;
     config.tawingSupabase = defu(config.tawingSupabase || {}, {
+      supabaseKey: options.supabaseKey,
+      supabaseUri: options.supabaseUri,
+    });
+
+    // needed for the vue app
+    config.public.tawingSupabase = defu(config.tawingSupabase || {}, {
       supabaseKey: options.supabaseKey,
       supabaseUri: options.supabaseUri,
     });
@@ -73,6 +80,9 @@ export default defineNuxtModule<ModuleOptions>({
 
     // add server plugin
     addServerPlugin(resolve("./runtime/server/plugin"));
+
+    // add nuxt plugin
+    addPlugin(resolve("./runtime/plugin"))
 
     // for the Vue app
     addImports({

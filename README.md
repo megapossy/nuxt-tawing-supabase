@@ -23,7 +23,7 @@ My Nuxt module for doing supabase things.
 
 <!-- Highlight some of the features your module provide here -->
 - ⛰ &nbsp;Supabase API
-- 🚠 &nbsp;For server use only.
+- 🚠 &nbsp;For server and Vue app use.
 - 🌲 &nbsp;Ethyl4lyf!
 
 ## Quick Setup
@@ -77,6 +77,16 @@ export default defineEventHandler(async (event) => {
   return data;
 });
 
+
+// component/or/pages/something.vue
+
+<script lang="ts" setup>
+const dataTest = ref()
+onMounted(async () => {
+  const { data } = await clientTawingSupabase.from("email_list").select().returns();
+  dataTest.value = data;
+})
+</script>
 ```
 
 
