@@ -1,9 +1,6 @@
 <template>
   <div>
-    Nuxt module playground!
+    <h1>APP.vue</h1>
+    <NuxtPage />
   </div>
 </template>
-
-<script lang="ts" setup>
-
-</script>

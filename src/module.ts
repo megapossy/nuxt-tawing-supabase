@@ -6,6 +6,8 @@ import {
   defineNuxtModule,
   logger,
   addServerPlugin,
+  addImports,
+  addPlugin,
 } from "@nuxt/kit";
 
 // Module options TypeScript interface definition
@@ -37,6 +39,12 @@ export default defineNuxtModule<ModuleOptions>({
       supabaseUri: options.supabaseUri,
     });
 
+    // needed for the vue app
+    config.public.tawingSupabase = defu(config.tawingSupabase || {}, {
+      supabaseKey: options.supabaseKey,
+      supabaseUri: options.supabaseUri,
+    });
+
     logger.success("`nuxt-tawing-supabase` is starting!");
 
     // virtual imports
@@ -55,19 +63,38 @@ export default defineNuxtModule<ModuleOptions>({
       // );
     });
 
-
     // create interfaces
     addTypeTemplate({
       filename: "types/nuxt-tawing-supabase.d.ts",
       getContents: () =>
         `declare module 'nuxt-tawing-supabase' {
-            const client: typeof import('${resolve("./runtime/server/services")}').client
-            const initTawingSupabase: typeof import('${resolve("./runtime/server/services")}').initTawingSupabase
-        }`
+            const client: typeof import('${resolve(
+              "./runtime/server/services"
+            )}').client
+            const initTawingSupabase: typeof import('${resolve(
+              "./runtime/server/services"
+            )}').initTawingSupabase
+        }`,
     });
+
 
     // add server plugin
     addServerPlugin(resolve("./runtime/server/plugin"));
+
+    // add nuxt plugin
+    addPlugin(resolve("./runtime/plugin"))
+
+    // for the Vue app
+    addImports({
+      name: "client",
+      as: "clientTawingSupabase",
+      from: resolve("./runtime/services"),
+    });
+    addImports({
+      name: "initTawingSupabase",
+      as: "initTawingSupabase",
+      from: resolve("./runtime/services"),
+    });
 
     logger.success("`nuxt-tawing-supabase` is ready!");
   },
