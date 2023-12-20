@@ -1,6 +1,6 @@
+import { initTawingSupabase } from "#nuxt-tawing-supabase";
 import {
   defineNuxtPlugin,
-  initTawingSupabase,
   useRuntimeConfig,
 } from "#imports";
 export default defineNuxtPlugin((nuxtApp) => {
@@ -15,11 +15,4 @@ export default defineNuxtPlugin((nuxtApp) => {
     if(config.supabaseUri && config.supabaseKey)
     initTawingSupabase(config.supabaseUri, config.supabaseKey);
   });
-
-  // addRouteMiddleware((to, from) => {
-  //   if (to.path === '/yoyo') {
-  //     console.log('Do something is yoyo')
-  //     return false
-  //   }
-  // })
 });

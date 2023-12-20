@@ -41,7 +41,7 @@ yarn add nuxt-tawing-supabase
 npm install nuxt-tawing-supabase
 ```
 
-2. Add `nuxt-tawing-supabase` to the `modules` section of `nuxt.config.ts`
+2. Add `nuxt-tawing-supabase` to the `modules` section of `nuxt.config.ts`. WARNING: Setting `serverOnly: false` will expose your URI and KEYS.
 
 ```js
 export default defineNuxtConfig({
