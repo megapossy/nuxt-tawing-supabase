@@ -34,6 +34,7 @@ export default defineNuxtModule<ModuleOptions>({
   },
   setup(options, nuxt) {
     logger.success("`nuxt-tawing-supabase` is starting!");
+
     const { resolve } = createResolver(import.meta.url);
 
     const config = nuxt.options.runtimeConfig as any;
@@ -60,12 +61,12 @@ export default defineNuxtModule<ModuleOptions>({
       // Note: #nuxt-tawing-supabase will be available on server only
       // Inline module runtime in Nitro bundle
       _config.alias["#nuxt-tawing-supabase"] = resolve("./runtime/services");
-
     });
 
     // #nuxt-tawing-supabase will be available to vue app also if serverOnly is disabled
-    if (!options.serverOnly) 
-    nuxt.options.alias["#nuxt-tawing-supabase"] = resolve("./runtime/services");
+    if (!options.serverOnly)
+      nuxt.options.alias["#nuxt-tawing-supabase"] =
+        resolve("./runtime/services");
 
     // create interfaces
     addTypeTemplate({
