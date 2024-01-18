@@ -14,6 +14,7 @@ import {
 export interface ModuleOptions {
   supabaseKey: string;
   supabaseUri: string;
+  serverOnly: boolean;
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -29,72 +30,77 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: {
     supabaseKey: process.env.SUPABASE_KEY || "",
     supabaseUri: process.env.SUPABASE_URI || "",
+    serverOnly: true,
   },
   setup(options, nuxt) {
+    logger.success("`nuxt-tawing-supabase` is starting!");
+
     const { resolve } = createResolver(import.meta.url);
 
     const config = nuxt.options.runtimeConfig as any;
     config.tawingSupabase = defu(config.tawingSupabase || {}, {
       supabaseKey: options.supabaseKey,
       supabaseUri: options.supabaseUri,
+      serverOnly: options.serverOnly,
     });
 
     // needed for the vue app
-    config.public.tawingSupabase = defu(config.tawingSupabase || {}, {
-      supabaseKey: options.supabaseKey,
-      supabaseUri: options.supabaseUri,
-    });
+    if (!options.serverOnly) {
+      config.public.tawingSupabase = defu(config.tawingSupabase || {}, {
+        supabaseKey: options.supabaseKey,
+        supabaseUri: options.supabaseUri,
+      });
+    }
 
-    logger.success("`nuxt-tawing-supabase` is starting!");
+    logger.info(`serverOnly: ${options.serverOnly}`);
 
     // virtual imports
-    nuxt.hook("nitro:config", (_config) => {
+    nuxt.hooks.hook("nitro:config", (_config) => {
       _config.alias = _config.alias || {};
 
+      // Note: #nuxt-tawing-supabase will be available on server only
       // Inline module runtime in Nitro bundle
-      _config.alias["nuxt-tawing-supabase"] = resolve(
-        "./runtime/server/services"
-      );
-
-      // DISABLED for now
-      // polyfill unicorn-magic
-      // _config.alias["unicorn-magic"] = resolve(
-      //   "./runtime/polyfills/unicorn-magic"
-      // );
+      _config.alias["#nuxt-tawing-supabase"] = resolve("./runtime/services");
     });
+
+    // #nuxt-tawing-supabase will be available to vue app also if serverOnly is disabled
+    if (!options.serverOnly)
+      nuxt.options.alias["#nuxt-tawing-supabase"] =
+        resolve("./runtime/services");
 
     // create interfaces
     addTypeTemplate({
       filename: "types/nuxt-tawing-supabase.d.ts",
       getContents: () =>
-        `declare module 'nuxt-tawing-supabase' {
+        `declare module '#nuxt-tawing-supabase' {
             const client: typeof import('${resolve(
-              "./runtime/server/services"
+              "./runtime/services"
             )}').client
             const initTawingSupabase: typeof import('${resolve(
-              "./runtime/server/services"
+              "./runtime/services"
             )}').initTawingSupabase
         }`,
     });
-
 
     // add server plugin
     addServerPlugin(resolve("./runtime/server/plugin"));
 
     // add nuxt plugin
-    addPlugin(resolve("./runtime/plugin"))
+    if (!options.serverOnly) addPlugin(resolve("./runtime/plugin"));
 
     // for the Vue app
-    addImports({
-      name: "client",
-      as: "clientTawingSupabase",
-      from: resolve("./runtime/services"),
-    });
-    addImports({
-      name: "initTawingSupabase",
-      as: "initTawingSupabase",
-      from: resolve("./runtime/services"),
-    });
+    if (!options.serverOnly) {
+      addImports({
+        name: "client",
+        as: "clientTawingSupabase",
+        from: resolve("./runtime/services"),
+      });
+      addImports({
+        name: "initTawingSupabase",
+        as: "initTawingSupabase",
+        from: resolve("./runtime/services"),
+      });
+    }
 
     logger.success("`nuxt-tawing-supabase` is ready!");
   },

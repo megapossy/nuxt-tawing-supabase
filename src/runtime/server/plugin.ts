@@ -1,7 +1,8 @@
-import { initTawingSupabase } from "nuxt-tawing-supabase";
+import { initTawingSupabase } from "#nuxt-tawing-supabase";
 import type { NitroApp } from "nitropack"
 
 import { useRuntimeConfig } from '#imports'
+
 
 
 /**
